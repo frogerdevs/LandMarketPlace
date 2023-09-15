@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcOrdering";
+import "google/protobuf/wrappers.proto";
+import "Protos/ordering_common.proto";
+
+package OrderingApi;
+
+service BenefitCartGrpc{
+    rpc GetItemsByUser(Ordering.Common.GrpcByIdRequest) returns (GrpcBenefitCartResponse){}
+}
+
+message GrpcBenefitCartResponse {
+    repeated GrpcBenefitCartItemResponse Data = 1;
+}
+message GrpcBenefitCartItemResponse {
+    optional string Id = 1;
+    optional string UserId = 2;
+    optional string ItemType = 3;
+    optional google.protobuf.StringValue PackageId = 4;
+    optional google.protobuf.StringValue UnitItemId = 5;
+    optional google.protobuf.StringValue SubscribeId = 6;
+    optional int32 Quantity = 7;
+    optional google.protobuf.StringValue VoucherCode = 8;
+}

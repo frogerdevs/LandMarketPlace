@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\Encryptor\ModelBuilderExtensions.cs" />
+  </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mediator.Abstractions" Version="2.1.5" />
+    <PackageReference Include="Mediator.SourceGenerator" Version="2.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Subscription.Domain\Subscription.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Extensions\Encryptor\ModelBuilderExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\Response\BenefitCarts\" />
+    <Folder Include="Dtos\Response\BenefitOrders\" />
+    <Folder Include="Dtos\Response\OrderPackages\" />
+    <Folder Include="Dtos\Response\OrderSubscribes\" />
+    <Folder Include="Dtos\Response\OrderUnitItems\" />
+    <Folder Include="Dtos\Response\SubscribeDetails\" />
+    <Folder Include="Dtos\Response\UserVouchers\" />
+    <Folder Include="Dtos\Response\Vouchers\Commands\" />
+    <Folder Include="Features\UserVouchers\Commands\" />
+    <Folder Include="Features\UserVouchers\Queries\" />
+  </ItemGroup>
+
+</Project>

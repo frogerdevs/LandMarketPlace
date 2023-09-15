@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcIdentity";
+import "google/protobuf/wrappers.proto";
+import "Protos/identity_common.proto";
+
+package IdentityApi;
+
+service InMerchantGrpc{
+    rpc GetItemsByCategorySlug(GrpcIdentity.Common.GrpcPagingByIdRequest) returns (GrpcInMerchantByCategoryResponse){}
+}
+
+
+message GrpcInMerchantByCategoryResponse {
+    int32 TotalData = 1;
+    int32 Limit = 2;
+    int32 CurrentPage = 3;
+    int32 Count = 4;
+    repeated GrpcInMerchantByCategoryItemResponse Data = 5;
+    bool Success = 6;
+    google.protobuf.StringValue Message = 7;
+}
+message GrpcInMerchantByCategoryItemResponse {
+    string Id = 1;
+    string CategoryId = 2;
+    string BrandName = 3;
+    string BrandSlug = 4;
+    google.protobuf.StringValue Province = 5;
+    google.protobuf.StringValue City = 6;
+    google.protobuf.StringValue District = 7;
+    bool Active = 8;
+    google.protobuf.StringValue ImageUrl = 9;
+    bool IsSeller = 10;
+}

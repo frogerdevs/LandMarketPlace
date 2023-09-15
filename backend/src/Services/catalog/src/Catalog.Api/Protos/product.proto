@@ -1,0 +1,145 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcCatalog";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Protos/catalog_common.proto";
+
+package CatalogApi;
+
+service ProductGrpc{
+    rpc GetItems(Catalog.Common.GrpcEmptyRequest) returns (GrpcProductResponse){}
+    rpc GetPagingItems(GrpcPagingProductRequest) returns (GrpcPagingProductResponse){}
+    rpc GetItemsByCategorySlug(Catalog.Common.GrpcPagingBySlugRequest) returns (GrpcProductsByCategoryResponse){}
+    rpc GetItemById (Catalog.Common.GrpcByIdRequest) returns (GrpcProductItemResponse) {}
+    rpc GetIndeals(GrpcPagingIndealsRequest) returns (GrpcPagingProductResponse){}
+    rpc GetItemBySlug (Catalog.Common.GrpcBySlugRequest) returns (GrpcProductItemResponse) {}
+}
+
+message GrpcPagingProductRequest {
+    int32 PageNumber = 1;
+    int32 PageSize = 2;
+    optional google.protobuf.StringValue UserId = 3;
+    optional google.protobuf.StringValue ProductName = 4;
+    optional google.protobuf.StringValue CategoryName = 5;
+    optional double Price = 6;
+    optional bool Active = 7;
+}
+message GrpcPagingIndealsRequest {
+    int32 PageNumber = 1;
+    int32 PageSize = 2;
+    google.protobuf.StringValue Search = 3;
+}
+message GrpcProductResponse {
+    repeated GrpcProductsItem Data = 1;
+}
+message GrpcProductsByCategoryResponse {
+    int32 TotalData = 1;
+    int32 Limit = 2;
+    int32 CurrentPage = 3;
+    int32 Count = 4;
+    repeated GrpcProductsByCategoryItemResponse Data = 5;
+    bool Success = 6;
+    google.protobuf.StringValue Message = 7;
+}
+message GrpcProductsByCategoryItemResponse {
+    string Id = 1;
+    string UserId = 2;
+    string CategoryId = 3;
+    google.protobuf.StringValue CategoryName = 4;
+    google.protobuf.StringValue CategorySlug = 5;
+    string Title = 6;
+    string Slug = 7;
+    google.protobuf.StringValue Province = 8;
+    google.protobuf.StringValue City = 9;
+    google.protobuf.StringValue District = 10;
+    double PriceFrom = 11;
+    double PriceTo = 12;
+    bool Active = 13;
+    google.protobuf.StringValue ImageUrl = 14;
+}
+
+message GrpcPagingProductResponse {
+    int32 TotalData = 1;
+    int32 Limit = 2;
+    int32 CurrentPage = 3;
+    int32 Count = 4;
+    repeated GrpcProductsItem Data = 5;
+}
+message GrpcProductsItem{
+    string Id = 1;
+    string UserId = 2;
+    string CategoryId = 3;
+    google.protobuf.StringValue CategoryName = 4;
+    google.protobuf.StringValue CategorySlug = 5;
+    string Title = 6;
+    string Slug = 7;
+    google.protobuf.StringValue Address = 8;
+    google.protobuf.StringValue City = 9;
+    google.protobuf.StringValue District = 10;
+    double PriceFrom = 11;
+    double PriceTo = 12;
+    google.protobuf.StringValue ImageUrl = 13;
+    bool Active = 14;
+}
+
+message GrpcProductItemResponse {
+    string Id = 1;
+    string UserId = 2;
+    string CategoryId = 3;
+    string CategoryName = 4;
+    string SubCategoryId = 5;
+    string SubCategoryName = 6;
+    string Title = 7;
+    string Slug = 8;
+    optional google.protobuf.StringValue Province = 9;
+    optional google.protobuf.StringValue City = 10;
+    optional google.protobuf.StringValue District = 11;
+    optional google.protobuf.StringValue SubDistrict = 12;
+    optional google.protobuf.StringValue PostCode = 13;
+    optional google.protobuf.StringValue Address = 14;
+    optional google.protobuf.StringValue CertificateId = 15;
+    optional google.protobuf.Timestamp RegisteredSince = 16;
+    double PriceFrom = 17;
+    double PriceTo = 18;
+    optional google.protobuf.StringValue Description = 19;
+    optional google.protobuf.StringValue Details = 20;
+    optional google.protobuf.StringValue LocationLongitude = 21;
+    optional google.protobuf.StringValue LocationLatitude = 22;
+    bool Active = 23;
+    repeated GrpcProductImageItemResponse ProductImages = 24;
+    repeated GrpcProductFacilityResponse ProductFacilities = 25;
+    repeated GrpcProductNearResponse ProductNears = 26;
+    repeated GrpcProductSpecificationResponse ProductSpecifications = 27;
+}
+
+message GrpcProductImageItemResponse {
+    string ProductId = 1;
+    google.protobuf.StringValue ImageUrl = 2;
+    google.protobuf.StringValue ImageType = 3;
+    google.protobuf.StringValue ImageName = 4;
+}
+
+message GrpcProductFacilityResponse {
+    string ProductId = 1;
+    string FacilityId = 2;
+    string FacilityName = 3;
+}
+
+message GrpcProductNearResponse {
+    string ProductId = 1;
+    string Title = 2;
+    repeated GrpcProductNearItemResponse ProductNearItems = 3;
+}
+
+message GrpcProductNearItemResponse {
+    string ProductId = 1;
+    string ProductNearId = 2;
+    string Title = 3;
+}
+
+message GrpcProductSpecificationResponse {
+    string ProductId = 1;
+    string Title = 2;
+    google.protobuf.StringValue Description = 3;
+}

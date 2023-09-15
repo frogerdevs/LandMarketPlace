@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcCatalog";
+import "google/protobuf/wrappers.proto";
+import "Protos/catalog_common.proto";
+
+package CatalogApi;
+
+service FacilityGrpc{
+    rpc GetItems(Catalog.Common.GrpcEmptyRequest) returns (GrpcFacilityResponse){}
+    rpc GetItemById (Catalog.Common.GrpcByIdRequest) returns (GrpcFacilityItemResponse) {}
+}
+
+message GrpcFacilityResponse {
+    repeated GrpcFacilityItemResponse Data = 1;
+}
+message GrpcFacilityItemResponse {
+    optional string Id = 1;
+    optional string Name = 2;
+    optional string Slug = 3;
+    optional string Description = 4;
+    optional google.protobuf.StringValue ImageUrl = 5;
+    bool Active = 6;
+}

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcIdentity";
+import "google/protobuf/wrappers.proto";
+import "Protos/identity_common.proto";
+
+package IdentityApi;
+
+service UserGrpc{
+    rpc GetUserBrand (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcUserBrandResponse) {}
+    rpc GetContactPerson (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcContactPersonResponse) {}
+    rpc GetProfileBrandBySlug (GrpcIdentity.Common.GrpcBySlugRequest) returns (GrpcProfileMerchantResponse) {}
+}
+
+message GrpcUserBrandResponse {
+    optional string BrandSlug = 1;
+    optional string BrandName = 2;
+}
+message GrpcContactPersonResponse {
+    optional string UserId = 1;
+    optional string BrandName = 2;
+    optional string BrandSlug = 3;
+    optional string ImageUrl = 4;
+    optional string Email = 5;
+    optional string Contact = 6;
+    optional string WhatsApp = 7;
+    optional string Facebook = 8;
+    optional string Instagram = 9;
+    optional string Twitter = 10;
+    optional string Tiktok = 11;
+    optional string Website = 12;
+}
+message GrpcProfileMerchantResponse {
+    optional string UserId = 1;
+    optional google.protobuf.StringValue ImageUrl = 2;
+    optional google.protobuf.StringValue BrandName = 3;
+    optional google.protobuf.StringValue BrandSlug = 4;
+    optional google.protobuf.StringValue CategoryId = 5;
+    optional google.protobuf.StringValue Address = 6;
+    optional google.protobuf.StringValue Province = 7;
+    optional google.protobuf.StringValue City = 8;
+    optional google.protobuf.StringValue District = 9;
+    optional google.protobuf.StringValue SubDistrict = 10;
+    optional google.protobuf.StringValue PostCode = 11;
+    optional bool Verified = 12;
+}

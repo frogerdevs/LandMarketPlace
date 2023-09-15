@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcCatalog";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Protos/catalog_common.proto";
+
+package CatalogApi;
+
+service HomeGrpc{
+    rpc GetCategories(Catalog.Common.GrpcEmptyRequest) returns (GrpcHomeCategoryResponse){}
+    rpc GetInDeals(Catalog.Common.GrpcEmptyRequest) returns (GrpcHomeInDealsResponse){}
+}
+
+message GrpcHomeCategoryResponse {
+    repeated GrpcHomeCategoryItemResponse Data = 1;
+}
+message GrpcHomeCategoryItemResponse {
+    optional string Id = 1;
+    optional string Name = 2;
+    optional string Slug = 3;
+    optional string Description = 4;
+    optional google.protobuf.StringValue ImageUrl = 5;
+    bool Active = 6;
+}
+message GrpcHomeInDealsResponse {
+    repeated GrpcHomeInDealsItemResponse Data = 1;
+}
+message GrpcHomeInDealsItemResponse {
+    optional string Id = 1;
+    optional string ProductId = 2;
+    optional string Title = 3;
+    optional string Slug = 4;
+    optional google.protobuf.StringValue ImageUrl = 5;
+    google.protobuf.Timestamp StartDate = 6;
+    google.protobuf.Timestamp EndDate = 7;
+    bool Active = 8;
+}

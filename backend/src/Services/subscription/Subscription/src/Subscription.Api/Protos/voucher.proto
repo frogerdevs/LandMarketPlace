@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcSubscription";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Protos/subscription_common.proto";
+
+package SubscriptionApi;
+
+service VoucherGrpc{
+    rpc GetItems(SubscriptionApi.Common.GrpcEmptyRequest) returns (GrpcVoucherResponse){}
+    rpc GetItemById (SubscriptionApi.Common.GrpcByIdRequest) returns (GrpcVoucherItemResponse) {}
+    rpc AddItem (GrpcAddVoucherRequest) returns (GrpcVoucherItemResponse) {}
+    rpc EditItem (GrpcEditVoucherRequest) returns (GrpcVoucherItemResponse) {}
+    rpc DeleteItem (SubscriptionApi.Common.GrpcDeleteRequest) returns (SubscriptionApi.Common.GrpcBoolResponse) {}
+}
+
+message GrpcAddVoucherRequest{
+    string Code = 1;
+    optional string Name = 2;
+    optional google.protobuf.StringValue Description = 3;
+    google.protobuf.Timestamp StarDate = 4;
+    google.protobuf.Timestamp EndDate = 5;
+    int32 Duration = 6;
+    bool Active = 7;
+    optional string CreatedBy = 8;
+}
+message GrpcEditVoucherRequest{
+    string Id = 1;
+    string Code = 2;
+    optional string Name = 3;
+    optional google.protobuf.StringValue Description = 4;
+    google.protobuf.Timestamp StarDate = 5;
+    google.protobuf.Timestamp EndDate = 6;
+    int32 Duration = 7;
+    bool Active = 8;
+    optional string UpdateBy = 9;
+}
+message GrpcVoucherResponse {
+    repeated GrpcVoucherItemResponse Data = 1;
+}
+message GrpcVoucherItemResponse {
+    string Id = 1;
+    string Code = 2;
+    optional string Name = 3;
+    optional google.protobuf.StringValue Description = 4;
+    google.protobuf.Timestamp StarDate = 5;
+    google.protobuf.Timestamp EndDate = 6;
+    int32 Duration = 7;
+    bool Active = 8;
+}

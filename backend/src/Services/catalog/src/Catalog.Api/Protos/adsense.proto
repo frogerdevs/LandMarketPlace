@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcCatalog";
+import "Protos/catalog_common.proto";
+package CatalogApi;
+
+
+service AdsenseGrpc{
+	rpc GetItems(Catalog.Common.GrpcEmptyRequest) returns (GrpcAdsenseResponse){}
+    rpc GetItemById (Catalog.Common.GrpcByIdRequest) returns (GrpcAdsenseItemResponse) {}
+}
+
+message GrpcAdsenseResponse {
+	repeated GrpcAdsenseItemResponse data = 1;
+}
+message GrpcAdsenseItemResponse {
+	optional string Id = 1;
+	optional string Name = 2;
+    optional string Slug = 3;
+    optional string Description = 4;
+    optional string ImageUrl = 5;
+    bool Active = 6;
+}

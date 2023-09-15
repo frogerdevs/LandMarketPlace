@@ -1,0 +1,18 @@
+
+// import { Poppins, Hind_Siliguri } from "next/font/google";
+
+// const poppins = Poppins({
+//   subsets: ["latin", "latin-ext", "devanagari"],
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+//   style: ["normal", "italic"],
+//   display: "swap",
+// });
+
+// const hindsiliguri = Hind_Siliguri({
+//   subsets: ["latin", "latin-ext", "bengali"],
+//   weight: ["300", "400", "500", "600", "700"],
+//   style: ["normal"],
+//   display: "swap",
+// });
+
+// export { hindsiliguri, poppins };

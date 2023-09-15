@@ -1,0 +1,12 @@
+﻿global using Mediator;
+global using Microsoft.EntityFrameworkCore;
+global using Subscription.Application.Dtos.Response.Base;
+global using Subscription.Application.Dtos.Response.PackageDetails;
+global using Subscription.Application.Dtos.Response.Subscribes;
+global using Subscription.Application.Dtos.Response.UnitItems;
+global using Subscription.Application.Dtos.Response.UnitTypes;
+global using Subscription.Application.Dtos.Response.Vouchers;
+global using Subscription.Application.Interfaces.Repositories.Base;
+global using Subscription.Domain.Entities.Subscriptions;
+global using Subscription.Domain.Entities.Vouchers;
+global using System.Text.Json.Serialization;

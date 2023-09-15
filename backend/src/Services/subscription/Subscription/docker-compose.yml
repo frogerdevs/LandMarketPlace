@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+  subscription-api:
+    image: ${DOCKER_REGISTRY-}subscriptionapi
+    build:
+      context: .
+      dockerfile: src/Subscription.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - dbPostgre
+      - logstash
+      - elasticsearch
+    ports:
+      - 4000:80
+      - 4443:443
+  dbPostgre:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    ports:
+      - '5435:5432'
+    volumes: 
+      - dbPostgre:/var/lib/postgresql/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.12.0
+    container_name: logstash
+    ports:
+      - 5000:5000
+    volumes:
+      - ./src/logstash/pipeline:/usr/share/logstash/pipeline
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.12.0
+    container_name: kibana
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+
+volumes:
+  dbPostgre:
+    driver: local
+  elasticsearch-data:

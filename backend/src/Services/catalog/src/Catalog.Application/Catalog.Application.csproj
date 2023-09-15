@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Category\**" />
+    <EmbeddedResource Remove="Features\Category\**" />
+    <None Remove="Features\Category\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\Encryptor\ModelBuilderExtensions.cs" />
+  </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mediator.Abstractions" Version="2.1.5" />
+    <PackageReference Include="Mediator.SourceGenerator" Version="2.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <!--<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Slugify.Core" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Extensions\Encryptor\ModelBuilderExtensions.cs" />
+  </ItemGroup>
+    <!--<ItemGroup>
+        <Protobuf Include="Protos\category.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\adsense.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\common.proto" GrpcServices="None" />
+        <None Remove="@(Protobuf)" />
+    </ItemGroup>-->
+</Project>

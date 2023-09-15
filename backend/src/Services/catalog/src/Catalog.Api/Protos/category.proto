@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcCatalog";
+import "google/protobuf/wrappers.proto";
+import "Protos/catalog_common.proto";
+
+package CatalogApi;
+
+service CategoryGrpc{
+    rpc GetItems(Catalog.Common.GrpcEmptyRequest) returns (GrpcCategoryResponse){}
+    rpc GetActiveItems(GrpcActiveCategoryRequest) returns (GrpcCategoryResponse){}
+    rpc GetItemById (Catalog.Common.GrpcByIdRequest) returns (GrpcCategoryItemResponse) {}
+    rpc GetItemBySlug (Catalog.Common.GrpcBySlugRequest) returns (GrpcCategoryItemResponse) {}
+}
+
+message GrpcActiveCategoryRequest {
+    bool Active=1;
+}
+
+message GrpcCategoryResponse {
+    repeated GrpcCategoryItemResponse Data = 1;
+}
+message GrpcCategoryItemResponse {
+    optional string Id = 1;
+    optional string Name = 2;
+    optional string Slug = 3;
+    optional string Description = 4;
+    optional google.protobuf.StringValue ImageUrl = 5;
+    bool Active = 6;
+}

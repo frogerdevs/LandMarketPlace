@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcIdentity";
+import "google/protobuf/wrappers.proto";
+import "Protos/identity_common.proto";
+
+package IdentityApi;
+
+service AboutGrpc{
+    rpc GetAboutByUser (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcAboutResponse) {}
+    rpc GetAboutByEmail (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcAboutResponse) {}
+}
+message GrpcAboutResponse {
+    string UserId = 1;
+    string Email = 2;
+    optional google.protobuf.StringValue PriceFrom = 3;
+    optional google.protobuf.StringValue PriceTo = 4;
+    optional google.protobuf.StringValue Description = 5;
+    optional google.protobuf.StringValue Vision = 6;
+    optional google.protobuf.StringValue Mission = 7;
+    optional google.protobuf.StringValue Contact = 8;
+    optional google.protobuf.StringValue WhatsApp = 9;
+    optional google.protobuf.StringValue Facebook = 10;
+    optional google.protobuf.StringValue Instagram = 11;
+    optional google.protobuf.StringValue Twitter = 12;
+    optional google.protobuf.StringValue Tiktok = 13;
+    optional google.protobuf.StringValue Website = 14;
+    repeated GrpcSellerAchievementResponse SellerAchievements = 15;
+    repeated GrpcSellerEventResponse SellerEvents = 16;
+}
+
+message GrpcSellerAchievementResponse {
+    string Title = 1;
+    string Image = 2;
+}
+
+message GrpcSellerEventResponse {
+    string Title = 1;
+    repeated GrpcSellerEventImageResponse Images = 2;
+}
+
+message GrpcSellerEventImageResponse {
+    string Image = 1;
+}

@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0b0244cf-5edd-402d-b8f3-f4dbb491346d</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerfileContext>..\..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="sharefile\**" />
+    <Content Remove="sharefile\**" />
+    <EmbeddedResource Remove="sharefile\**" />
+    <None Remove="sharefile\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.55.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.55.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.57.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="4.7.0" />
+    <PackageReference Include="OpenIddict.Validation.SystemNetHttp" Version="4.7.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Http" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Catalog.Application\Catalog.Application.csproj" />
+    <ProjectReference Include="..\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\adsense.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\category.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\product.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\product_discount.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\home_deal.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\facility.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\home.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\catalog_common.proto" GrpcServices="None" />
+    <None Remove="@(Protobuf)" />
+    <None Remove="Protos\catalog_common.proto" />
+  </ItemGroup>
+    <!--<ItemGroup>
+        <Protobuf Include="..\Catalog.Application\Protos\category.proto" GrpcServices="Server" />
+        <Protobuf Include="..\Catalog.Application\Protos\adsense.proto" GrpcServices="Server"  />
+        <Protobuf Include="..\Catalog.Application\Protos\common.proto" GrpcServices="None" />
+        <None Remove="@(Protobuf)" />
+    </ItemGroup>-->
+</Project>

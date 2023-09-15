@@ -1,0 +1,13 @@
+global using Catalog.Api.Controllers.v1;
+global using Catalog.Application.Dtos.Response.Base;
+global using Catalog.Application.Dtos.Response.Category;
+global using Catalog.Application.Features.Categories.Commands;
+global using Catalog.Application.Features.Categories.Queries;
+global using Catalog.Domain.Entities.Categories;
+global using Mediator;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Moq;
+global using NUnit.Framework;

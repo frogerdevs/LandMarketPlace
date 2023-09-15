@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcSubscription";
+import "google/protobuf/wrappers.proto";
+import "Protos/subscription_common.proto";
+
+package SubscriptionApi;
+
+service UnitItemGrpc{
+    rpc GetItems(SubscriptionApi.Common.GrpcEmptyRequest) returns (GrpcUnitItemsResponse){}
+    rpc GetItemById (SubscriptionApi.Common.GrpcByIdRequest) returns (GrpcUnitItemResponse) {}
+    rpc AddItem (GrpcAddUnitItemRequest) returns (GrpcUnitItemResponse) {}
+    rpc EditItem (GrpcEditUnitItemRequest) returns (GrpcUnitItemResponse) {}
+    rpc DeleteItem (SubscriptionApi.Common.GrpcDeleteRequest) returns (SubscriptionApi.Common.GrpcBoolResponse) {}
+}
+message GrpcAddUnitItemRequest{
+    string Title = 1;
+    optional google.protobuf.StringValue Description = 2;
+    int32 ValidDuration = 3;
+    int32 LiveDuration = 4;
+    string BenefitType = 5;
+    optional google.protobuf.StringValue BenefitSize = 6;
+    int32 QuantityUpload = 7;
+    int32 Priority = 8;
+    bool ShowInPackage = 9;
+    bool ShowInPageInDealPrice = 10;
+    bool ShowInPageInSpirationPrice = 11;
+    bool Active = 12;
+    double Price = 13;
+    double DiscountPrice = 14;
+    int32 DiscountPercent = 15;
+    optional google.protobuf.StringValue CreatedBy = 16;
+}
+message GrpcEditUnitItemRequest{
+    string Id = 1;
+    optional string Title = 2;
+    optional google.protobuf.StringValue Description = 3;
+    int32 ValidDuration = 4;
+    int32 LiveDuration = 5;
+    string BenefitType = 6;
+    optional google.protobuf.StringValue BenefitSize = 7;
+    int32 QuantityUpload = 8;
+    int32 Priority = 9;
+    bool ShowInPackage = 10;
+    bool ShowInPageInDealPrice = 11;
+    bool ShowInPageInSpirationPrice = 12;
+    bool Active = 13;
+    double Price = 14;
+    double DiscountPrice = 15;
+    int32 DiscountPercent = 16;
+    optional google.protobuf.StringValue UpdateBy = 17;
+}
+
+message GrpcUnitItemsResponse {
+    repeated GrpcUnitItemResponse Data = 1;
+}
+message GrpcUnitItemResponse {
+    string Id = 1;
+    optional string Title = 2;
+    optional google.protobuf.StringValue Description = 3;
+    int32 ValidDuration = 4;
+    int32 LiveDuration = 5;
+    string BenefitType = 6;
+    optional google.protobuf.StringValue BenefitSize = 7;
+    int32 QuantityUpload = 8;
+    int32 Priority = 9;
+    bool ShowInPackage = 10;
+    bool ShowInPageInDealPrice = 11;
+    bool ShowInPageInSpirationPrice = 12;
+    bool Active = 13;
+    double Price = 14;
+    double DiscountPrice = 15;
+    int32 DiscountPercent = 16;
+}

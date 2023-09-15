@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcIdentity";
+import "google/protobuf/wrappers.proto";
+import "Protos/identity_common.proto";
+
+package IdentityApi;
+
+service RegionAddressGrpc{
+    rpc GetProvinceById (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcAddressItemResponse) {}
+    rpc GetCityById (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcAddressItemResponse) {}
+    rpc GetDisctrictById (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcAddressItemResponse) {}
+    rpc GetSubDisctrictById (GrpcIdentity.Common.GrpcByIdRequest) returns (GrpcAddressItemResponse) {}
+}
+
+message GrpcAddressItemResponse {
+    optional string Id = 1;
+    optional string Name = 2;
+}

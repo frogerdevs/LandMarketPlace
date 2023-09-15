@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcSubscription";
+import "google/protobuf/wrappers.proto";
+import "Protos/subscription_common.proto";
+
+package SubscriptionApi;
+
+service PackageGrpc{
+    rpc GetItems(SubscriptionApi.Common.GrpcEmptyRequest) returns (GrpcPackageResponse){}
+    rpc GetItemById (SubscriptionApi.Common.GrpcByIdRequest) returns (GrpcPackageItemResponse) {}
+    rpc AddItem (GrpcAddPackageRequest) returns (GrpcPackageItemResponse) {}
+    rpc EditItem (GrpcEditPackageRequest) returns (GrpcPackageItemResponse) {}
+    rpc DeleteItem (SubscriptionApi.Common.GrpcDeleteRequest) returns (SubscriptionApi.Common.GrpcBoolResponse) {}
+}
+message GrpcAddPackageRequest{
+    optional string Title = 1;
+    optional google.protobuf.StringValue Description = 2;
+    int32 Duration = 3;
+    double Price = 4;
+    double DiscountPrice = 5;
+    int32 DiscountPercent = 6;
+    bool Active = 7;
+    optional google.protobuf.StringValue CreatedBy = 8;
+}
+message GrpcEditPackageRequest{
+    optional string Id = 1;
+    optional string Name = 2;
+    optional google.protobuf.StringValue Description = 3;
+    optional int32 Duration = 4;
+    optional double Price = 5;
+    optional double DiscountPrice  = 6;
+    optional int32 DiscountPercent  = 7;
+    optional bool Active = 8;
+    optional google.protobuf.StringValue UpdateBy = 9;
+}
+
+message GrpcPackageResponse {
+    repeated GrpcPackageItemResponse Data = 1;
+}
+message GrpcPackageItemResponse {
+    optional string Id = 1;
+    optional string Title = 2;
+    optional google.protobuf.StringValue Description = 3;
+    optional int32 Duration = 4;
+    optional double Price = 5;
+    optional double DiscountPrice  = 6;
+    optional int32 DiscountPercent  = 7;
+    optional bool Active = 8;
+}

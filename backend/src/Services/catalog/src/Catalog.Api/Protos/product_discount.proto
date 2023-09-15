@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcCatalog";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Protos/catalog_common.proto";
+
+package CatalogApi;
+
+service ProductDiscountGrpc{
+    rpc GetItems(Catalog.Common.GrpcEmptyRequest) returns (GrpcProductDiscountResponse){}
+    rpc GetItemsByCategorySlug (GrpcByCategorySlugRequest) returns (GrpcProductDiscountByCategorySlugResponse) {}
+    rpc GetItemById (Catalog.Common.GrpcByIdRequest) returns (GrpcProductDiscountItemResponse) {}
+    rpc GetItemsOfTheWeek(Catalog.Common.GrpcEmptyRequest) returns (GrpcProductDiscountsOfTheWeekResponse){}
+}
+
+message GrpcByCategorySlugRequest {
+    string Slug = 1;
+    int32 PageSize = 2;
+}
+
+message GrpcProductDiscountByCategorySlugResponse{
+    repeated GrpcProductDiscountByCategorySlugItem Data =1;
+}
+message GrpcProductDiscountByCategorySlugItem {
+    string UserId = 1;
+    string CategoryId = 2;
+    string CategorySlug = 3;
+    string DiscountId = 4;
+    optional google.protobuf.StringValue DiscountName = 5;
+    string Slug = 6;
+    double DiscountPercent = 7;
+    double DiscountPrice = 8;
+    google.protobuf.Timestamp DiscountStart = 9;
+    google.protobuf.Timestamp DiscountEnd = 10;
+    bool Active = 11;
+    string ProductId = 12;
+    string ProductTitle = 13;
+    string ProductSlug = 14;
+    string Province = 15;
+    optional google.protobuf.StringValue City = 16;
+    optional google.protobuf.StringValue District = 17;
+    double PriceFrom = 18;
+    double PriceTo = 19;
+    optional google.protobuf.StringValue ImageUrl = 20;
+    string CategoryName = 21;
+}
+
+message GrpcProductDiscountResponse {
+    repeated GrpcProductDiscountItemResponse Data = 1;
+}
+message GrpcProductDiscountItemResponse {
+    optional string Id = 1;
+    optional string UserId = 2;
+    optional string ProductId = 3;
+    optional string ProductTitle = 4;
+    optional string DiscountName = 5;
+    optional double DiscountPercent = 6;
+    optional double DiscountPrice = 7;
+    google.protobuf.Timestamp DiscountStart = 8;
+    google.protobuf.Timestamp DiscountEnd = 9;
+    optional google.protobuf.StringValue ImageUrl = 10;
+    bool Active = 11;
+}
+
+message GrpcProductDiscountsOfTheWeekResponse{
+    repeated GrpcProductDiscountOfTheWeekItem Data =1;
+}
+message GrpcProductDiscountOfTheWeekItem {
+    string UserId = 1;
+    string CategoryId = 2;
+    string CategorySlug = 3;
+    string DiscountId = 4;
+    optional google.protobuf.StringValue DiscountName = 5;
+    double DiscountPercent = 6;
+    double DiscountPrice = 7;
+    google.protobuf.Timestamp DiscountStart = 8;
+    google.protobuf.Timestamp DiscountEnd = 9;
+    string ProductId = 10;
+    string ProductTitle = 11;
+    string ProductSlug = 12;
+    bool ProductActive = 13;
+    string Province = 14;
+    optional google.protobuf.StringValue City = 15;
+    optional google.protobuf.StringValue District = 16;
+    double PriceFrom = 17;
+    double PriceTo = 18;
+    optional google.protobuf.StringValue ImageUrl = 19;
+}

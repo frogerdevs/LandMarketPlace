@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcSubscription";
+import "google/protobuf/wrappers.proto";
+import "Protos/subscription_common.proto";
+
+package SubscriptionApi;
+
+service UnitTypeGrpc{
+    rpc GetItems(SubscriptionApi.Common.GrpcEmptyRequest) returns (GrpcUnitTypeResponse){}
+    rpc GetItemById (SubscriptionApi.Common.GrpcByIdRequest) returns (GrpcUnitTypeItemResponse) {}
+    rpc AddItem (GrpcAddUnitTypeRequest) returns (GrpcUnitTypeItemResponse) {}
+    rpc EditItem (GrpcEditUnitTypeRequest) returns (GrpcUnitTypeItemResponse) {}
+    rpc DeleteItem (SubscriptionApi.Common.GrpcDeleteRequest) returns (SubscriptionApi.Common.GrpcBoolResponse) {}
+}
+
+message GrpcAddUnitTypeRequest{
+    optional string Name = 1;
+    optional google.protobuf.StringValue Description = 2;
+    optional google.protobuf.StringValue Size = 3;
+    bool Active = 4;
+    optional string CreatedBy = 5;
+}
+message GrpcEditUnitTypeRequest{
+    string Id = 1;
+    optional string Name = 2;
+    optional google.protobuf.StringValue Description = 3;
+    optional google.protobuf.StringValue Size = 4;
+    bool Active = 5;
+    optional string UpdateBy = 6;
+}
+message GrpcUnitTypeResponse {
+    repeated GrpcUnitTypeItemResponse Data = 1;
+}
+message GrpcUnitTypeItemResponse {
+    optional string Id = 1;
+    optional string Name = 2;
+    optional google.protobuf.StringValue Description = 3;
+    optional google.protobuf.StringValue Size = 4;
+    bool Active = 5;
+}

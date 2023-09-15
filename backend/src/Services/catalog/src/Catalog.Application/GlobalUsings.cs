@@ -1,0 +1,17 @@
+﻿global using Catalog.Application.Dtos.Request.Products;
+global using Catalog.Application.Dtos.Response.Base;
+global using Catalog.Application.Dtos.Response.Category;
+global using Catalog.Application.Dtos.Response.HomeDeals;
+global using Catalog.Application.Dtos.Response.ProductDiscounts;
+global using Catalog.Application.Dtos.Response.Products;
+global using Catalog.Application.Interfaces.Repositories.Base;
+global using Catalog.Domain.Entities.Adsenses;
+global using Catalog.Domain.Entities.Categories;
+global using Catalog.Domain.Entities.Certificate;
+global using Catalog.Domain.Entities.Deals;
+global using Catalog.Domain.Entities.Facilities;
+global using Catalog.Domain.Entities.Products;
+global using Mediator;
+global using Microsoft.EntityFrameworkCore;
+global using Slugify;
+global using System.Text.Json.Serialization;
